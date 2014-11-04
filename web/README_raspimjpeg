@@ -1,0 +1,54 @@
+Status:
+
+ready     --> MJPEG is streaming, not capturing
+video     --> MJPEG is streaming and video is capturing
+boxing    --> MJPEG is streaming and video is packed into mp4
+image     --> MJPEG is streaming and image is capturing
+timelapse --> MJPEG is streaming and timelapse is active
+halted    --> RaspiMJPEG is idle
+md_ready  --> See 'ready', motion is detection active
+md_video  --> See 'video', motion is detection active
+md_boxing --> See 'boxing', motion is detection active
+errror    --> An error occured and the application terminated
+
+
+Cmd	Description	Type	Value	Notes
+
+ca	capture video	bool	0/1
+im	image capture	NA		
+tl	timelapse	num	[0|#]	parameter is time between images in 1/10 seconds, 0 stop timelapse
+px	set res/fps	string	"AAAA BBBB CC DD EEEE FFFF"	video = AxB px, C fps, boxed with D fps, image = ExF px
+an	set annotation	string	"text"
+ab	set ann. back	bool	0/1
+sh	sharpness	num	#	(range: [-100;100]; default: 0)
+co	contrast	num	#	(range: [-100;100]; default: 0)
+br	brightness	num	#	(range: [0;100]; default: 50)
+sa	saturation	num	#	(range: [-100;100]; default: 0)
+is	set ISO value	num	#	(range: [100;800]; default: 0=auto)
+vs	video stabil.	bool	0/1
+rl	raw layer	bool	0/1
+ec	exposure comp.	bool	#	(range: [-10;10]; default: 0)
+em	exposure mode	string	""	[off|auto|night|nightpreview|backlight|spotlight|sports|snow|beach|verylong|fixedfps|antishake|fireworks]
+wb	white balance	string	""	[off|auto|sun|cloud|shade|tungsten|fluorescent|incandescent|flash|horizon]
+mm	metering mode	string	""	[average|spot|backlit|matrix]
+ie	image effect	string	""	[negative|solarise|posterize|whiteboard|blackboard|sketch|denoise|emboss|oilpaint|hatch|gpen|pastel|watercolour|film|blur|saturation]
+ce	colour effect	string	""	pattern "0/1 u v" where 0/1: enable/dis, u,v=0-255
+ro	rotation	num	#	(0-359) degrees
+fl	flip image	num	#	[0|1|2|n]	(0: hf/vf=0, 1: hf=1/vf=0, 2: hf=0/vf=1, any: hf=1/vf=1)
+ri	sensor region	string	AAAAA BBBBB CCCCC DDDDD	x=A, y=B, w=C, h=D
+ss	shutter speed	num	#
+qu	image quality	num	%
+bi	stream bitrate	num	#
+ru	stream halt	bool	0/1
+md	motion detect.	bool	0/1
+
+
+
+	 	Aspect 
+Resolution	Ratio 	Framerates 	Video 	Image 	FoV
+2592x1944 	4:3 	1-15fps 	x 	x 	Full
+1296x972 	4:3 	1-42fps 	x 	  	Full
+1296x730 	16:9 	1-49fps 	x 	  	Full
+640x480 	4:3 	42.1-60fps 	x 	  	Full
+640x480 	4:3 	60.1-90fps 	x 	  	Full
+1920x1080 	16:9 	1-30fps 	x 	  	Partial

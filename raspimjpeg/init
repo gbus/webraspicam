@@ -1,0 +1,22 @@
+#!/bin/sh
+
+
+if [ ! -d /dev/shm/mjpeg ];
+then 
+	sudo mkdir /dev/shm/mjpeg;
+fi
+
+if [ ! -d /var/run/raspimjpeg ];
+then
+	sudo mkdir -p /var/run/raspimjpeg;
+fi
+
+
+if [  ! -e /var/run/raspimjpeg/FIFO ] ;
+then
+	sudo mknod /var/run/raspimjpeg/FIFO p;
+	sudo chmod 666 /var/run/raspimjpeg/FIFO;
+fi
+
+
+sudo raspimjpeg

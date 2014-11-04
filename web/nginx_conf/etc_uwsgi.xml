@@ -1,0 +1,14 @@
+<uwsgi>
+  <gid>www-data</gid>
+  <uid>www-data</uid>
+  <vhost></vhost>
+  <enable-logging></enable-logging>
+  <socket>127.0.0.1:9093</socket>
+  <processes>1</processes>
+  <master></master>
+  <harakiri>20</harakiri>
+  <limit-as>128</limit-as>
+  <memory-report></memory-report>
+  <no-orphans></no-orphans>
+</uwsgi>
+
