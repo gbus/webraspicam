@@ -87,6 +87,13 @@
 	</tr>
 
 
+        <!-- Download bar -->
+	<tr>
+	  <td>
+<button type="button" class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#mediaModal">Browse media</button>
+          </td>
+	</tr>
+
 
 
 <!--
@@ -236,9 +243,68 @@
  </div> <!--container-->
 
 
+
+
+
+
+<!-- Modal panels showing image, video, tlapse downloads -->
+<div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Media</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#images-tab" data-toggle="tab"><span class="glyphicon glyphicon-camera"></span> Images</a></li>
+  <li><a href="#videos-tab" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> Videos</a></li>
+</ul>
+<div class="tab-content">
+        <div class="tab-pane active" id="images-tab"">
+
+<table class="table table-hover">
+<tr><td><a href="static/raspicam/media/images/image_0000_20141106_093548.jpg">image_0000_20141106_093548</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/images/image_0002_20141106_093554.jpg">image_0002_20141106_093554</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/images/image_0003_20141106_093557.jpg">image_0003_20141106_093557</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/images/image_0000_20140906_150946.jpg">image_0000_20140906_150946</a></td><td><span class="label label-info">78.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/images/image_0000_20141106_093824.jpg">image_0000_20141106_093824</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/images/image_0001_20141106_093551.jpg">image_0001_20141106_093551</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+</table>
+        </div>
+
+        <div class="tab-pane" id="videos-tab">
+
+<table class="table table-hover">
+<tr><td><a href="static/raspicam/media/video_0000_20141106_093015.mp4">video_0000_20141106_093015</a></td><td><span class="label label-info">10.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/video_0000_20141106_094518.mp4">video_0000_20141106_094518</a></td><td><span class="label label-info">2.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/video_0000_20141106_095132.mp4">video_0000_20141106_095132</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/video_0000_20141106_095528.mp4">video_0000_20141106_095528</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+<tr><td><a href="static/raspicam/media/video_0000_20141106_101231.mp4">video_0000_20141106_101231</a></td><td><span class="label label-info">0.0 KB</span></td></tr>
+</table>
+
+        </div>
+</div><!-- tab content -->
+
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 	<!-- Status bar -->
-			  <i class="icon-wrench"></i><div id="content-pane">Channel: ... Position: ...</div>
-	
+
 
 
 

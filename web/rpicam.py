@@ -23,6 +23,7 @@ sys.path = [os.path.join(root_project_path, 'lib')] + sys.path
 
 from servo import Servo
 from rpicontrol import *
+from mediascan import getvideoinfo,getimageinfo
 
 # jpeg name written in /dev/shm/mjpeg by raspimjpeg
 raspicam_path = '/dev/shm/mjpeg'
@@ -30,6 +31,14 @@ raspicam_filename = 'cam.jpg'
 raspicam_status_file = "/home/pi/webraspicam/web/static/raspicam/status_mjpeg"
 status_check_sec = 3
 raspififo = "/var/run/raspimjpeg/FIFO"
+
+
+media_path	= "static/raspicam/media"
+image_subdir	= "images"
+video_subdir	= "videos"
+image_path	= "%s/%s" % (media_path, image_subdir)
+video_path	= "%s/%s" % (media_path, video_subdir)
+
 
 
 render = web.template.render('templates/')
@@ -49,6 +58,7 @@ urls = (
   # raspimjpeg controls
   '/raspimjpeg/status/(.*)', 'RaspicamStatus',
   '/raspimjpeg/(.*)/(.*)', 'RaspicamCmd',
+  '/raspimjpeg/media', 'RaspicamMedia',
 
 
   # Camera jpeg streaming
@@ -133,6 +143,12 @@ class RaspicamStatus:
 class RaspicamCmd:
 	def GET(self, cmd, value=''):
 		return raspimjpeg_cmd(raspififo, cmd, value)
+
+class RaspicamMedia:
+    def GET(self):
+        allmedia = {'videos': getvideoinfo(video_path),'images': getimageinfo(image_path)}
+        web.header('Content-Type', 'application/json')
+        return json.dumps(allmedia)
 
 app = web.application(urls, globals())
 
