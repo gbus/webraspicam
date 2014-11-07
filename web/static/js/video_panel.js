@@ -20,7 +20,26 @@ $(document).ready(function () {
 });
 
 
+// set focus when modal is opened
+$(document).ready(function () {
+  $('#mediaModal').on('shown.bs.modal', function () {
+    loadMediaInfo()
+  });
+});
 
+
+function loadMediaInfo() {
+	$.getJSON('json_example_toremove',{ }, function (data) {
+	     $('#imagepanelcontent').append('<table class="table table-hover">')
+	     $('#imagepanelcontent').append('<tr><td><a href="'+data.images.id+'">'+data.images.id+'</a></td><td><span class="label label-info">1.0 MB</span></td></tr>')
+	     $('#imagepanelcontent').append('</table>')
+	     $.each.images(data, function () {
+			data.images = 
+		       //do your work here with each value returned from server side.
+	     });
+	});
+
+}
 
 viewerAlert = function() {}
 viewerAlert.warning = function(alertType, alertContent) {
