@@ -20,9 +20,9 @@ $(document).ready(function () {
 });
 
 
-// set focus when modal is opened
+// Scan media directory for images and videos when the modal it shown 
 $(document).ready(function () {
-  $('#mediaModal').on('show.bs.modal', function () {
+  $('#mediaModal').on('shown.bs.modal', function () {
     loadMediaInfo()
   });
 });
@@ -45,19 +45,19 @@ function loadMediaInfo() {
 	     // The html tables are generated
 	     var imagehtml = '<table class="table table-hover">'     
 	     $.each(imagelist, function(index, im) {
-	        imagehtml = imagehtml + '<tr><td><a href="'+im.fname+'" target="_blank">'+im.id+'</a></td><td><span class="label label-info">'+im.size+'</span></td></tr>'
+	        imagehtml = imagehtml + '<tr><td><input type="checkbox" value="'+im.fname+'"> <a href="'+im.fname+'" target="_blank"> '+im.dt+'</a></td><td align="right"><span class="label label-info">'+im.size+'</span></td></tr>'
 	     });
 	     imagehtml = imagehtml+'</table>'
 	     
 	     var videohtml = '<table class="table table-hover">'
 	     $.each(videolist, function(index, vi) {
-	        videohtml = videohtml + '<tr><td><a href="'+vi.fname+'" target="_blank">'+vi.id+'</a></td><td><span class="label label-info">'+vi.size+'</span></td></tr>'
+	        videohtml = videohtml + '<tr><td><input type="checkbox" value="'+vi.fname+'"> <a href="'+vi.fname+'" target="_blank"> '+vi.dt+'</a></td><td align="right"><span class="label label-info">'+vi.size+'</span></td></tr>'
 	     });
 	     videohtml = videohtml+'</table>'   
 	     
 	     // The tables are assigned to the respective tabs
-	     $('#tabled-image-list').append(imagehtml)
-	     $('#tabled-video-list').append(videohtml)
+	     $('#tabled-image-list').html(imagehtml)
+	     $('#tabled-video-list').html(videohtml)
 	});
 
 }
