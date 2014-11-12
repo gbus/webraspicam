@@ -1,8 +1,14 @@
-import time
+from datetime import datetime
 from os import path
 from glob import glob
 from humansize import approximate_size
 
+
+# Converts the strings d="YYYYMMDD" and t="HHMMSS" in a datetime object
+# Returns something like: Wed Nov 12 13:35:43 2014
+def getdatetime(d,t):
+	dt = datetime(int(d[0:4]), int(d[4:6]), int(d[6:8]), int(t[0:2]), int(t[2:4]), int(t[4:6]))
+	return dt.ctime()
 
 def getvideoinfo(video_path):
 	videos = []
@@ -11,9 +17,9 @@ def getvideoinfo(video_path):
 	for v_file in video_files:
 		v_file_name	= path.basename(v_file)
 		v_file_id	= v_file_name.split('.')[0]	# Remove path and extension
-		v_file_date	= v_file_id.split('_')[2]
-		v_file_time	= v_file_id.split('_')[3]
-		videos.append({'id': v_file_id, 'size': approximate_size(path.getsize(v_file), False), 'date': v_file_date, 'time': v_file_time, 'fname': v_file_name})
+		v_file_dt	= getdatetime(v_file_id.split('_')[2], v_file_id.split('_')[3])
+		
+		videos.append({'id': v_file_id, 'size': approximate_size(path.getsize(v_file), False), 'dt': v_file_dt, 'fname': "%s/%s"%(video_path,v_file_name)})
 	return videos
 
 
@@ -24,9 +30,8 @@ def getimageinfo(image_path):
 	for i_file in image_files:
 		i_file_name	= path.basename(i_file)
 		i_file_id	= i_file_name.split('.')[0]	# Remove path and extension
-		i_file_date	= i_file_id.split('_')[2]
-		i_file_time	= i_file_id.split('_')[3]
-		images.append({'id': i_file_id, 'size': approximate_size(path.getsize(i_file), False), 'date': i_file_date, 'time': i_file_time, 'fname': i_file_name})
+		i_file_dt	= getdatetime(i_file_id.split('_')[2], i_file_id.split('_')[3])
+		images.append({'id': i_file_id, 'size': approximate_size(path.getsize(i_file), False), 'dt': i_file_dt, 'fname': "%s/%s"%(image_path,i_file_name)})
 	return images
 
 

@@ -22,21 +22,42 @@ $(document).ready(function () {
 
 // set focus when modal is opened
 $(document).ready(function () {
-  $('#mediaModal').on('shown.bs.modal', function () {
+  $('#mediaModal').on('show.bs.modal', function () {
     loadMediaInfo()
   });
 });
 
 
 function loadMediaInfo() {
-	$.getJSON('json_example_toremove',{ }, function (data) {
-	     $('#imagepanelcontent').append('<table class="table table-hover">')
-	     $('#imagepanelcontent').append('<tr><td><a href="'+data.images.id+'">'+data.images.id+'</a></td><td><span class="label label-info">1.0 MB</span></td></tr>')
-	     $('#imagepanelcontent').append('</table>')
-	     $.each.images(data, function () {
-			data.images = 
-		       //do your work here with each value returned from server side.
+	$.getJSON("/raspimjpeg/media", function (data) {
+	     var imagelist = data.images;
+	     var videolist = data.videos;
+
+	     // Images and videos are sorted by date and time (field dt)	     
+	     imagelist.sort(function(a,b){
+	       return new Date(b.dt) - new Date(a.dt);
 	     });
+	     videolist.sort(function(a,b){
+	       return new Date(b.dt) - new Date(a.dt);
+	     }); 	     
+
+
+	     // The html tables are generated
+	     var imagehtml = '<table class="table table-hover">'     
+	     $.each(imagelist, function(index, im) {
+	        imagehtml = imagehtml + '<tr><td><a href="'+im.fname+'" target="_blank">'+im.id+'</a></td><td><span class="label label-info">'+im.size+'</span></td></tr>'
+	     });
+	     imagehtml = imagehtml+'</table>'
+	     
+	     var videohtml = '<table class="table table-hover">'
+	     $.each(videolist, function(index, vi) {
+	        videohtml = videohtml + '<tr><td><a href="'+vi.fname+'" target="_blank">'+vi.id+'</a></td><td><span class="label label-info">'+vi.size+'</span></td></tr>'
+	     });
+	     videohtml = videohtml+'</table>'   
+	     
+	     // The tables are assigned to the respective tabs
+	     $('#tabled-image-list').append(imagehtml)
+	     $('#tabled-video-list').append(videohtml)
 	});
 
 }
@@ -60,20 +81,6 @@ function set_preset(value) {
 
 }
 
-/*
-function set_res() {
-  
-  while(document.getElementById("video_width").value.length < 4) document.getElementById("video_width").value = "0" + document.getElementById("video_width").value;
-  while(document.getElementById("video_height").value.length < 4) document.getElementById("video_height").value = "0" + document.getElementById("video_height").value;
-  while(document.getElementById("video_fps").value.length < 2) document.getElementById("video_fps").value = "0" + document.getElementById("video_fps").value;
-  while(document.getElementById("MP4Box_fps").value.length < 2) document.getElementById("MP4Box_fps").value = "0" + document.getElementById("MP4Box_fps").value;
-  while(document.getElementById("image_width").value.length < 4) document.getElementById("image_width").value = "0" + document.getElementById("image_width").value;
-  while(document.getElementById("image_height").value.length < 4) document.getElementById("image_height").value = "0" + document.getElementById("image_height").value;
-  
-  send_cmd("px", document.getElementById("video_width").value + " " + document.getElementById("video_height").value + " " + document.getElementById("video_fps").value + " " + document.getElementById("MP4Box_fps").value + " " + document.getElementById("image_width").value + " " + document.getElementById("image_height").value);
-
-}
-*/
 
 function set_res() {
   var imgw0 = imgw;
