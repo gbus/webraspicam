@@ -2,6 +2,9 @@ import os
 import sys
 import web
 import json
+from shutil import move
+import tarfile
+from datetime import datetime
 
 c_path = os.path.split(os.path.dirname(sys.argv[0]))[0]
 
@@ -36,8 +39,10 @@ raspififo = "/var/run/raspimjpeg/FIFO"
 media_path	= "static/raspicam/media"
 image_subdir	= "images"
 video_subdir	= "videos"
+waste_subdir	= "wastebasket"
 image_path	= "%s/%s" % (media_path, image_subdir)
 video_path	= "%s/%s" % (media_path, video_subdir)
+waste_path	= "%s/%s" % (media_path, waste_subdir)
 
 
 
@@ -59,6 +64,7 @@ urls = (
   '/raspimjpeg/status/(.*)', 'RaspicamStatus',
   '/raspimjpeg/(.*)/(.*)', 'RaspicamCmd',
   '/raspimjpeg/media', 'RaspicamMedia',
+  '/raspimjpeg/mediamgt', 'RaspicamMediaManagement',
 
 
   # Camera jpeg streaming
@@ -149,6 +155,25 @@ class RaspicamMedia:
         allmedia = {'videos': getvideoinfo(video_path),'images': getimageinfo(image_path)}
         web.header('Content-Type', 'application/json')
         return json.dumps(allmedia)
+
+class RaspicamMediaManagement:
+	def POST(self):
+		post_data = web.input(name=[])
+		if post_data:
+			for entry in post_data:
+				move (waste_path, entry.fname)
+
+class RaspicamMediaDownload:
+	def POST(self):
+		post_data = web.input(name=[])
+		if post_data:
+			tarfilename = "/tmp/media_%s.tar"%datetime.now().isoformat('_')
+			tar = tarfile.open(tarfilename, "w")
+			for entry in post_data:
+			    tar.add(entry, recursive=False)
+			tar.close()
+			return tarfilename
+
 
 app = web.application(urls, globals())
 
