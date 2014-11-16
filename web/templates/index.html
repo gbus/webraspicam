@@ -259,7 +259,8 @@
 
 
 
-        	<form method="POST" role="form" action="/raspimjpeg/mediamgt">
+       
+	<form id="mediaForm" method="post">
 
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#images-tab" data-toggle="tab"><span class="glyphicon glyphicon-camera"></span> Images</a></li>
@@ -282,14 +283,15 @@
         </div>
 </div><!-- tab content -->
 
+      		<button type="submit" class="btn btn-danger" id="btndelete">Delete</button>
 
+
+      </form>
       </div>
       <div class="modal-footer">
       		<button type="submit" class="btn btn-info" id="btndownload">Download</button>
-      		<button type="submit" class="btn btn-danger" id="btndelete">Delete</button>
       </div>
       
-      </form>
     </div>
   </div>
 </div>

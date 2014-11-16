@@ -27,14 +27,24 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-	$("#btndownload").click(function(){
+$(function () {
+	$("#btndownload").click(function(e){
+		e.preventDefault();
+		alert('Delete pressed');
+		/*
 		var selectedMedia = new Array();
 		$('input[name="selmedia"]:checked').each(function() {
 			selectedMedia.push(this.value);
 		});
-		// $.post("url", selectedMedia);
-		$('#debugselmedia').html("Number of selected Media: "+selectedMedia.length+"\n"+"And, they are: "+selectedMedia);
+		$.post("/raspimjpeg/mediamgt", selectedMedia);
+		*/
+		      /*
+      $.post('http://path/to/post', 
+         $('#mediaForm').serialize(), 
+         function(data, status, xhr){
+           // do something here with response;
+         });
+      */
 	});
 });
 
@@ -55,7 +65,7 @@ function loadMediaInfo() {
 	     // The html tables are generated
 	     var imagehtml = '<table class="table table-hover">'     
 	     $.each(imagelist, function(index, im) {
-	        imagehtml = imagehtml + '<tr><td><input type="checkbox" name="'+im.id+'" value="'+im.fname+'"> <a href="'+im.fname+'" target="_blank"> '+im.dt+'</a></td><td align="right"><span class="label label-info">'+im.size+'</span></td></tr>'
+	        imagehtml = imagehtml + '<tr><td><input type="checkbox" id="selmedia" name="selmedia" value="'+im.fname+'"> <a href="'+im.fname+'" target="_blank"> '+im.dt+'</a></td><td align="right"><span class="label label-info">'+im.size+'</span></td></tr>'
 	     });
 	     imagehtml = imagehtml + '<div id="debugselmedia"></div>'
 	     imagehtml = imagehtml+'</table>'
