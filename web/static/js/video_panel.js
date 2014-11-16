@@ -55,14 +55,14 @@ function loadMediaInfo() {
 	     // The html tables are generated
 	     var imagehtml = '<table class="table table-hover">'     
 	     $.each(imagelist, function(index, im) {
-	        imagehtml = imagehtml + '<tr><td><input type="checkbox" name="selmedia" id="'+im.id+'" value="'+im.fname+'"> <a href="'+im.fname+'" target="_blank"> '+im.dt+'</a></td><td align="right"><span class="label label-info">'+im.size+'</span></td></tr>'
+	        imagehtml = imagehtml + '<tr><td><input type="checkbox" name="'+im.id+'" value="'+im.fname+'"> <a href="'+im.fname+'" target="_blank"> '+im.dt+'</a></td><td align="right"><span class="label label-info">'+im.size+'</span></td></tr>'
 	     });
 	     imagehtml = imagehtml + '<div id="debugselmedia"></div>'
 	     imagehtml = imagehtml+'</table>'
 	     
 	     var videohtml = '<table class="table table-hover">'
 	     $.each(videolist, function(index, vi) {
-	        videohtml = videohtml + '<tr><td><input type="checkbox" name="selmedia" id="'+vi.id+'" value="'+vi.fname+'"> <a href="'+vi.fname+'" target="_blank"> '+vi.dt+'</a></td><td align="right"><span class="label label-info">'+vi.size+'</span></td></tr>'
+	        videohtml = videohtml + '<tr><td><input type="checkbox" name="'+vi.id+'" value="'+vi.fname+'"> <a href="'+vi.fname+'" target="_blank"> '+vi.dt+'</a></td><td align="right"><span class="label label-info">'+vi.size+'</span></td></tr>'
 	     });
 	     videohtml = videohtml+'</table>'   
 	     

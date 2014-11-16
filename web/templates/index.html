@@ -259,13 +259,14 @@
 
 
 
-        	<form role="form">
+        	<form method="POST" role="form" action="/raspimjpeg/mediamgt">
 
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#images-tab" data-toggle="tab"><span class="glyphicon glyphicon-camera"></span> Images</a></li>
 	  <li><a href="#videos-tab" data-toggle="tab"><span class="glyphicon glyphicon-film"></span> Videos</a></li>
 	</ul>
       <div class="tab-content">
+      
 	<!-- Image list -->	
         <div class="tab-pane active" id="images-tab">
 		<div id="tabled-image-list"> </div>
@@ -300,7 +301,7 @@
 
 	<!-- Status bar -->
 
-
+<div id=debugselmedia></div>
 
 
 <script src="http://code.jquery.com/jquery.js"></script>

@@ -158,10 +158,12 @@ class RaspicamMedia:
 
 class RaspicamMediaManagement:
 	def POST(self):
-		post_data = web.input(name=[])
+		post_data = web.input()
 		if post_data:
-			for entry in post_data:
-				move (waste_path, entry.fname)
+			for i,f in post_data.items():
+				if os.path.isfile(f):
+					os.rename( f, "%s/%s"%(waste_path,os.path.basename(f)) )
+		return "All done"
 
 class RaspicamMediaDownload:
 	def POST(self):
